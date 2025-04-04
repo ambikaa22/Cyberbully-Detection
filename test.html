@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Test</title>
+</head>
+<body>
+    <h1>Flask Connection Test</h1>
+    <textarea id="textInput" rows="4" cols="50"></textarea>
+    <br>
+    <button onclick="testConnection()">Test Connection</button>
+    <div id="result"></div>
+
+    <script>
+        async function testConnection() {
+            const text = document.getElementById('textInput').value || 'Hello';
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                resultDiv.innerHTML = 'Sending request...';
+                const response = await fetch('http://127.0.0.1:5000/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: text }),
+                });
+                
+                const data = await response.json();
+                resultDiv.innerHTML = `Response: ${JSON.stringify(data)}`;
+            } catch (error) {
+                resultDiv.innerHTML = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html> 

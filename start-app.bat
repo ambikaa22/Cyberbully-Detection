@@ -1,0 +1,6 @@
+@echo off
+echo Starting Flask server...
+start cmd /k "cd /d %~dp0 && python app.py"
+echo Starting Next.js server...
+start cmd /k "cd /d %~dp0 && pnpm run dev:3001"
+echo Servers started! Open http://localhost:3001 in your browser. 
